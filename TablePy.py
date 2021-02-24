@@ -85,21 +85,3 @@ class Table:
 
         # Index[0] -> longest key in dict; index[1] -> longest item in dict
         return [key_list[-1], item_list[-1]]
-
-
-# appending sample dictionary [DEL]
-sample_dictionary = {}
-sample_dictionary['MyReally LONG value!'] = 'MY REALLY LOdaNG ITEM'
-sample_dictionary['MyReally LONG valSAdasdasdue!'] = 'MY REALLY dasLONG ITEM'
-sample_dictionary['MyReally LONG valsadaue!'] = 'MY REALLY LONGsdas ITEM'
-sample_dictionary['MyReally LONG valasdasdasdasdadaue!'] = 'MY REALLYsda LONG ITEM'
-sample_dictionary['MyReally LONG valuasdasdae!'] = 'MY REALLY LONGdasda ITEM'
-
-# Creating a table
-constructor = Table()
-first_table = constructor.create_table(table_dict = sample_dictionary)
-
-# Outputting table as well as checking table attributes (of most recent table)
-print(first_table)
-print('Dictionary Length: ', constructor.length)
-print('Count of all items in table: ', constructor.content_count)
