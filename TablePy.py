@@ -1,16 +1,31 @@
 ''' A simple Python table creation libary '''
 
+__author__ = 'Lotus'
+__version__ = '0.1'
+
 class Table:
+    """ Class responsible for
+    constructing tables. """
     def __init__(self):
         self.length = 0
         self.content_count = 0
-        self.repeat_char('=', 10000)
+
+    def __repr__(self):
+        return 'Table() class'
+
+    def get_length(self):
+        # len getter
+        return self.length
+
+    def get_content_count(self):
+        # content count getter
+        return self.content_count
 
     def repeat_char(self, char: str, n: int):
         return char*n
 
     def create_table(self, table_dict: dict):
-        ''' Method responsible for creating table '''
+        ''' Method responsible for mainly creating table '''
         # Creating string to be returned in this method
         full_table = ''
 
@@ -23,20 +38,27 @@ class Table:
         h_closer2: str = self.repeat_char('=', longest_item+2) + '+'
         full_h_closer: str = h_closer1 + h_closer2 + '\n'
 
+        # appending top hCloser to return value
         full_table += full_h_closer
 
+        # Writing each line in table iterative and appending to return value
         for key in table_dict.keys():
+            # calculating spaces needed for every seperator to be evenly spaced
             key_spaces = longest_key - len(key)
             value_spaces = longest_item - len(table_dict[key])
 
+            # constructing current line
             line_part1 = '| ' + key + ' '*key_spaces + ' | '
             line_part2 = table_dict[key] + ' '*value_spaces + ' |'
             full_line = line_part1 + line_part2 + '\n'
 
+            # appending each line to return value
             full_table += full_line
         
+        # appending bottom hCloser to return value
         full_table += full_h_closer
         
+        # setting class attributes
         self.length = len(table_dict.keys())
         self.content_count = len(table_dict.keys()) * 2
 
@@ -65,17 +87,19 @@ class Table:
         return [key_list[-1], item_list[-1]]
 
 
-table_dictionary = {}
-table_dictionary['MyReally LONG value!'] = 'MY REALLY LOdaNG ITEM'
-table_dictionary['MyReally LONG valSAdasdasdue!'] = 'MY REALLY dasLONG ITEM'
-table_dictionary['MyReally LONG valsadaue!'] = 'MY REALLY LONGsdas ITEM'
-table_dictionary['MyReally LONG valasdasdasdasdadaue!'] = 'MY REALLYsda LONG ITEM'
-table_dictionary['MyReally LONG valuasdasdae!'] = 'MY REALLY LONGdasda ITEM'
+# appending sample dictionary [DEL]
+sample_dictionary = {}
+sample_dictionary['MyReally LONG value!'] = 'MY REALLY LOdaNG ITEM'
+sample_dictionary['MyReally LONG valSAdasdasdue!'] = 'MY REALLY dasLONG ITEM'
+sample_dictionary['MyReally LONG valsadaue!'] = 'MY REALLY LONGsdas ITEM'
+sample_dictionary['MyReally LONG valasdasdasdasdadaue!'] = 'MY REALLYsda LONG ITEM'
+sample_dictionary['MyReally LONG valuasdasdae!'] = 'MY REALLY LONGdasda ITEM'
 
+# Creating a table
+constructor = Table()
+first_table = constructor.create_table(table_dict = sample_dictionary)
 
-my_table = Table()
-table = my_table.create_table(table_dict = table_dictionary)
-
-print(table)
-print('Dictionary Length: ', my_table.length)
-print('Count of all items in table: ', my_table.content_count)
+# Outputting table as well as checking table attributes (of most recent table)
+print(first_table)
+print('Dictionary Length: ', constructor.length)
+print('Count of all items in table: ', constructor.content_count)
