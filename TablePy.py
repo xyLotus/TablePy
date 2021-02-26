@@ -1,7 +1,7 @@
 ''' A simple Python table creation libary '''
 
 __author__ = 'Lotus'
-__version__ = '0.1'
+__version__ = '0.3'
 
 def repeat_char(char: str, n_times: int):
     """ This function repeats the given char [@param1]
@@ -24,8 +24,6 @@ def get_longest_elements(dictionary: dict) -> int:
     # Sorting the, now appended, lists the easy way...
     key_list.sort()
     item_list.sort()
-    print(key_list)
-    print(item_list)
 
     # Index[0] -> longest key in dict; index[1] -> longest item in dict
     return [key_list[-1], item_list[-1]]
@@ -34,12 +32,16 @@ def get_longest_elements(dictionary: dict) -> int:
 class Table:
     """ Class responsible for
     constructing tables. """
-    def __init__(self):
+    def __init__(self, table_dict):
+        self.table_dict = table_dict
         self.length = 0
         self.content_count = 0
 
     def __repr__(self):
         return 'Table() class'
+
+    def __str__(self):
+        return self.create_table(self.table_dict)
 
     def get_length(self):
         """ Method getting length attr """
@@ -89,3 +91,4 @@ class Table:
         self.content_count = len(table_dict.keys()) * 2
 
         return full_table
+
